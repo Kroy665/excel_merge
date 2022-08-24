@@ -12,4 +12,6 @@ streamlit run main.py
 ## Run
 sh ./run.sh
 
+# HAPPY CODDING
+
 
