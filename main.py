@@ -1,3 +1,4 @@
+from operator import index
 import streamlit as st
 import pandas as pd
 import openpyxl
@@ -10,8 +11,8 @@ if uploaded_file is not None:
     sheetsLength = len(sheets)
     i=0
     for sheet in sheets:
-        df = pd.read_excel(uploaded_file, sheet_name=sheet)
-        df.to_excel(f'temp{i}.xlsx')
+        df = pd.read_excel(uploaded_file, sheet_name=sheet,)
+        df.to_excel(f'temp{i}.xlsx' , index = False)
         i+=1
 
 
@@ -23,10 +24,10 @@ if st.button("Merge"):
         df_total = df_total.append(df)
 
         mergeWrite = pd.ExcelWriter(f'merged{i}.xlsx')
-        df_total.to_excel(mergeWrite,sheet_name='Sheet1')
+        df_total.to_excel(mergeWrite,sheet_name='Sheet1', index = False)
         mergeWrite.save()
 
-        df_total.to_excel(writer, sheet_name=f'Sheet{i+1}')
+        df_total.to_excel(writer, sheet_name=f'Sheet{i+1}', index = False)
         writer.save()
         # df_total.to_excel(f'merged{i}.xlsx')
     st.success("Merged successfully")
